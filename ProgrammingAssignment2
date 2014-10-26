@@ -8,7 +8,6 @@
 makeCacheMatrix <- function(x = matrix()) {
 	## Initialize 'm' (inverse) to Null
 	m <- NULL
-	
 	## Reset the matrix 'x' a new value via Set function; 
 	set <- function(y) {
 		x <<- y
