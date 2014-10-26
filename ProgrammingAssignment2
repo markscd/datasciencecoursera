@@ -1,0 +1,52 @@
+## Author: M. Farrell
+## Date: 26 October 2014
+## Class: R Programming, Assignment 2
+##
+## The function below allows a matrix to be the inverse
+## It is based on the sample functions makeVector and cacheVector
+## but creates a special 'matrix' object
+makeCacheMatrix <- function(x = matrix()) {
+	## Initialize 'm' (inverse) to Null
+	m <- NULL
+	
+	## Reset the matrix 'x' a new value via Set function; 
+	set <- function(y) {
+		x <<- y
+		
+	## 'm' (inverse) is also reset to Null
+		m <<- NULL}
+	
+	## Return the matrix
+	get <- function() x
+	
+	## After the inverse is calculated, the vector's inverse attribute value is set
+	setInverse <- function(solve) {m <<- solve}
+	
+	## The inverse value is returned
+	getInverse <- function() m
+	
+	## List the methods inside of makeCacheMatrix
+	list(set = set,
+		get = get,
+		setInverse = setInverse,
+		getInverse = getInverse)}
+		
+## Calculate the matrix's inverse; if stored, skip the calculation.
+cacheSolve <- function(x, ...) {
+
+## Return the matrix that is x's inverse.
+	m <- x$getInverse()
+	if(!is.null(m)) {
+		message("Obtaining cached data")
+		return(m)}
+		
+	## Else, if getInverse has not been used to store the data,
+	## then retrieve matrix stored in your vector and call 'data'
+	data <- x$get()
+	m <- solve(data)
+	
+	## The mean is stored in the special vector
+	x$setInverse(m)
+	
+	## Print the inverse of the matrix
+	m}
